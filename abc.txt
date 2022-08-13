@@ -1,6 +1,408 @@
-qwert
-yuiop
-asdfg
-hjkl
-zxcv
-bnm
+#!/bin/bash                          
+# Shebang
+
+echo "Hi..Im Varun"                  # Printing a line
+ls -lt                               # Listing all the files with time
+pwd                                  # Shows present working directory
+df -h                                # Shows disk memory
+date                                 # Shows date
+uname -a                             # Display linux version with system specs
+
+# To execute the program
+ 
+# ./<file_name>.sh
+
+
+
+
+#!/bin/bash
+# Shebang
+
+file=$1                              # Passing an augument from outside
+count=1                              # Defining a variable
+
+while read line                      # For reading each line
+do
+        words=`echo $line | wc -w`   # Reading file name for outside & pipe with word count - word
+        echo "$count:$words"         # Display number of counts & words
+        count=`expr $count + 1`      # Increment with 1
+done < $file
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+df -h | sed '1d' | sed 's/%/ /g' > temp1               # Disk Storage -- Deleting 1st row -- replace % with empty -- moving to temp1 file
+echo "Printing Disc Size Greater Than 10%"             # Printing a sentence
+
+while read line                                        # For reading each line
+do
+        num=`echo $line | awk -F " " '{print $5}'`     # Defining a variable -- Selecting only 5th column
+        if [ $num -ge 10 ]; then                       # Condition
+                echo $line | awk -F " " '{print $1}'   # Display the 1st column
+fi
+done < temp1                                           # Closing a temp1 file
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+
+file=$1                                                 # Passing an augument file from outside
+
+echo "Print People Name Who Are Eligible For Voting"    # Printing a statement
+
+sed '1d' $file > temp                                   # Deleting 1st line & move to temp file
+
+while read line                                         # For reading each line
+do
+        age=`echo $line | awk -F " " '{print $3}'`      # Defining a variable -- Selecting only 3rd column
+
+        if [ $age -ge 18 ]; then                        # Condition
+                echo $line | awk -F " " '{print $1}'    # Display the 1st column
+        fi
+done < temp                                             # Closing a temp1 file
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+echo "Enter The value of N"              # Printing a statement
+read n                                   # Reading a variable
+
+a=0                                      # Initializing a number to a variable
+b=1                                      # Initializing a number to a variable
+count=2                                  # Initializing a number to a variable
+
+echo "Fibonacci Series"                  # Printing a statement
+echo $a                                  # Reading a variable
+echo $b                                  # Reading a variable
+
+while [ $count -le $n ]                  # Condition
+do 
+        fib=`expr $a + $b`               # Defining a variable with maths calculation
+        a=$b                             # Moving content of B to A
+        b=$fib                           # Moving content of Fib to B
+        echo $fib                        # Reading a variable
+        count=`expr $count + 1`          # Incriment of count
+done
+
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+echo "Enter a number"                               # Printing a statement
+read num                                            # Reading a variable
+
+fact=1                                              # Initializing a number to a variable
+
+while [ $num -gt 0 ]                                # Condition
+do
+        fact=`expr $fact \* $num`                   # Defining a variable with maths calculation
+        num=`expr $num - 1`                         # Maths calculation
+done
+echo "factorial of the input number is $fact"       # Printing the output
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+for i in $*                                     # All arguments passed outside to a script
+do 
+        num=$i                                  # Initializing a variable
+        fact=1                                  # Initializing a number to a variable
+        while [ $num -gt 0 ]                    # Condition
+        do
+                fact=`expr $fact \* $num`       # Defining a variable with maths calculation
+                num=`expr $num - 1`             # Maths calculation
+        done
+        echo "Factorial of $i is $fact"         # Printing the output 
+done
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+echo "Enter A Fruit Name"                      # Printing a statement
+read name                                      # Reading a variable
+if [ $name = Apple ] ; then                    # Condition
+        echo "Yes. This Fruit Is Apple"        # Printing a statement
+else
+        echo "No. This Fruit Is Not Apple"     # Printing a statement
+fi
+
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+echo "Enter A Number"                                 # Printing a statement
+read number                                           # Reading a variable
+if [ $number = 2 ] ; then                             # Condition
+        echo "You Have Entered Number $number"        # Printing a statement
+elif [ $number = 4 ] ; then                           # Condition
+        echo "You Have Entered Number $number"        # Printing a statement
+else
+        echo "You Have Entered Neither 2 Nor 4"       # Printing a statement
+fi
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+echo "Enter First Number"                       # Printing a statement
+read num1                                       # Reading a variable
+
+echo "Enter Second Number"                      # Printing a statement
+read num2                                       # Reading a variable
+
+if [ $num1 -gt $num2 ] ; then                   # Condition
+        echo "$num1 Is Greater Than $num2"      # Printing a statement
+else
+        echo "$num2 Is Greater Than $num1"      # Printing a statement
+fi
+
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+a=0                                            # Initializing a number to a variable
+while [ "$a" -lt 10 ]                          # Condition
+do
+   b="$a"                                      # Moving content of a to b
+   while [ "$b" -ge 0 ]                        # Condition
+   do
+      echo -n "$b "                            # Printing b
+      b=`expr $b - 1`                          # Maths calculation
+   done
+   echo
+   a=`expr $a + 1`                             # Incriment of a
+done
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+if [ $# -ne 3 ]; then                         # Condition to pass only 3 numbers
+       echo "Pass Only Three Numbers"         # Printing a statement
+exit 1                                        # Exit from loop
+fi
+
+if [ $1 -gt $2 ] && [ $1 -gt $3 ]; then       # Condition
+    echo "$1 is big"                          # Printing a statement
+
+elif [ $2 -gt $3 ]; then                      # Condition
+    echo "$2 is big"                          # Printing a statement
+
+else 
+        echo "$3 is big"                      # Printing a statement
+fi
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+num=0                            # Initializing a number to a variable
+while [ $num -lt 10 ]            # Condition
+do
+num=`expr $num + 2`              # Maths calculation
+echo "$num"                      # Print num
+done
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+echo "Enter User Name"                                            # Printing a statement
+read username                                                     # Reading a variable
+
+echo "Welcome $username...!"                                      # Printing a statement
+
+echo "Create A Password"                                          # Printing a statement
+read password                                                     # Reading a variable
+
+length="${#password}"                                             # Condition
+
+if test $length -ge 8 ; then                                      # Condition
+        echo "$password" | grep -q [0 -9]                         # Reading entered input and searching for numerics
+if test $? -eq 0 ; then                                           # Condition
+        echo "$password" | grep -q [A-Z]                          # Reading entered input and searching for uppercase letters
+if test $? -eq 0 ; then                                           # Condition
+        echo "$password" | grep -q [a-z]                          # Reading entered input and searching for lowercase letters
+if test $? -eq 0 ; then                                           # Condition
+        echo "$password" | grep -q [$,@,#,%]                      # Reading entered input and searching for special characters
+if test $? -eq 0 ; then                                           # Condition
+        echo "Strong Password"                                    # Printing a statement
+        echo "Welcome $username to Portal"                        # Printing a statement
+
+else
+        echo "Weak Password - Include Special Characters"         # Printing a statement
+fi
+else
+        echo "Weak Password - Include Lower Case"                 # Printing a statement
+fi
+else
+        echo "Weak Password - Include Upper Case"                 # Printing a statement
+fi
+else
+        echo "Weak Password - Include Numbers"                    # Printing a statement
+fi
+else
+        echo "Password Length Should Be Lengthy"                  # Printing a statement:
+fi
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+num=0                          # Initializing a number to a variable
+while [ $num -lt 10 ]          # Condition
+do
+num=`expr $num + 1`            # Maths calculation
+echo "$num"                    # Print num
+done
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+echo "WELCOME TO VSC LLC"                # Printing a statement
+
+echo "Enter Your Name"                   # Printing a statement
+read name                                # Reading a variable
+
+echo "Hi $name...!"                      # Printing a statement with variable
+
+echo "Enter Your Password"               # Printing a statement  
+read password                            # Reading a variable
+
+if [ $password == secret ]; then         # Condition
+        echo "Welcome to Linux"          # Printing a statement 
+else
+        echo "Password Is Incorrect"     # Printing a statement 
+fi
+
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+str="$1"                                 # Passing an augument file from outside
+rstring=""                               # Making a variable empty
+len=${#str}                              # Passing an augument
+
+for (( i=$len-1; i>=0; i-- ))            # Condition
+do
+   rstring="$rstring${str:$i:1}"         # Maths calculation
+done
+
+echo "$rstring"                          # Printing the output
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+if [ $# -ne 3 ]; then                       # Condition to pass only 3 numbers
+       echo "Pass Only Three Numbers"       # Printing a statement 
+exit 1                                      # Exit from loop                         
+fi
+
+if [ $1 -lt $2 ] && [ $1 -lt $3 ]; then     # Conditions
+    echo "$1 Is The Smallest Number"        # Printing a statement
+
+elif [ $2 -lt $3 ]; then                    # Conditions
+    echo "$2 Is The Smallest Number"        # Printing a statement
+
+else
+        echo "$3 Is The Smallest Number"    # Printing a statement
+fi
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+if [ $# -ne 3 ]; then                        # Condition to pass only 3 numbers
+       echo "Pass Only Three Numbers"        # Printing a statement 
+exit 1                                       # Exit from loop  
+fi
+
+if [ $1 -gt $2 ] && [ $1 -lt $3 ]; then      # Conditions
+    echo "$1 is 2nd Biggest Number"          # Printing a statement
+
+elif [ $2 -lt $3 ]; then                     # Conditions
+    echo "$2 is 2nd Biggest Number"          # Printing a statement
+
+else
+        echo "$3 is 2nd Biggest Number"      # Printing a statement
+fi
+
+
+#Author: Varun Bharadwaj
+#Date: July 2022
+
+#!/bin/bash
+# Shebang
+
+echo "Enter the Name"                       # Printing a statement
+read name                                   # Reading a variable
+
+if [ -f $name ]; then                       # Coditions "-f means file"
+       echo "$name Is A File"               # Printing a statement
+elif [ -d $name ]; then                     # Condition "-d means directory"
+ echo "$name Is A Directory"                # Printing a statement
+elif [ -L $name ]; then                     # Condition "-L means link"
+ echo "$name Is A Link"                     # Printing a statement
+else
+       echo "$name Does Not Exist"          # Printing a statement
+fi
